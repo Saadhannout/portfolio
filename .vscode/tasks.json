@@ -1,0 +1,11 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "🚀 Deploy Portfolio",
+      "type": "shell",
+      "command": "git add .; git commit -m 'Update portfolio'; git push",
+      "problemMatcher": []
+    }
+  ]
+}
