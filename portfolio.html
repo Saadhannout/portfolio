@@ -371,6 +371,56 @@
   @media (prefers-reduced-motion: reduce){
     *{ animation:none !important; transition:none !important; }
   }
+
+  /* ---------- Project cards (data-driven) + modal ---------- */
+  .project-card{ cursor:pointer; }
+  .project-cover{
+    width:100%; aspect-ratio:16/10; border-radius:14px; overflow:hidden;
+    margin-bottom:16px; background:linear-gradient(135deg,var(--sky-2),var(--glow));
+    display:flex; align-items:center; justify-content:center; font-size:48px;
+  }
+  .project-cover img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .pm-overlay{
+    position:fixed; inset:0; z-index:500; background:rgba(15,41,66,.6);
+    backdrop-filter:blur(6px); display:none; align-items:flex-start; justify-content:center;
+    padding:40px 16px; overflow-y:auto;
+  }
+  .pm-overlay.open{ display:flex; }
+  .pm-box{
+    background:#fff; border-radius:22px; width:100%; max-width:860px; position:relative;
+    padding:28px; box-shadow:0 30px 80px rgba(15,41,66,.35); animation:pmIn .3s ease;
+  }
+  @keyframes pmIn{ from{ opacity:0; transform:translateY(24px);} to{ opacity:1; transform:none;} }
+  .pm-close{
+    position:absolute; top:14px; right:14px; width:38px; height:38px; border-radius:50%;
+    border:none; background:var(--sky); color:var(--navy); font-size:20px; cursor:pointer; z-index:2;
+  }
+  .pm-close:hover{ background:var(--sky-2); }
+  .pm-title{ font-size:26px; font-weight:700; margin:0 44px 6px 0; }
+  .pm-tools{ color:var(--blue-dark); font-weight:600; font-size:14px; margin-bottom:18px; }
+  .pm-main{
+    position:relative; width:100%; aspect-ratio:16/9; border-radius:16px; overflow:hidden;
+    background:linear-gradient(135deg,var(--sky-2),var(--glow)); display:flex; align-items:center; justify-content:center;
+    font-size:64px;
+  }
+  .pm-main img{ width:100%; height:100%; object-fit:contain; background:#f4f8fd; display:block; }
+  .pm-nav{
+    position:absolute; top:50%; transform:translateY(-50%); width:40px; height:40px; border-radius:50%;
+    border:none; background:rgba(255,255,255,.9); box-shadow:0 4px 12px rgba(0,0,0,.2);
+    font-size:18px; cursor:pointer;
+  }
+  .pm-prev{ left:12px; } .pm-next{ right:12px; }
+  .pm-thumbs{ display:flex; gap:10px; margin-top:12px; overflow-x:auto; padding-bottom:4px; }
+  .pm-thumbs img{
+    width:96px; height:60px; object-fit:cover; border-radius:10px; cursor:pointer;
+    border:2px solid transparent; opacity:.7; flex:0 0 auto;
+  }
+  .pm-thumbs img.active{ border-color:var(--blue); opacity:1; }
+  .pm-body h4{ margin:22px 0 8px; font-family:'Poppins',sans-serif; font-size:16px; }
+  .pm-body p{ color:var(--text-soft); line-height:1.7; margin-bottom:10px; }
+  .pm-body ul{ list-style:disc; padding-left:20px; color:var(--text-soft); line-height:1.8; }
+  .pm-source{ display:inline-block; margin-top:18px; font-size:13px; color:var(--text-soft); text-decoration:underline; }
+  @media (max-width:600px){ .pm-box{ padding:18px; } .pm-title{ font-size:21px; } }
 </style>
 </head>
 <body>
@@ -416,7 +466,7 @@
 
   <div class="photo-circle">
     <img
-      src="Screenshot 2026-08-25 164439.png"
+      src="portfolio.jpeg"
       alt="Saad Hannout"
       style="width: 100%; height: 100%; object-fit: cover; 
       object-position: center 60%;"
@@ -504,57 +554,7 @@
     <div class="eyebrow reveal">Projects</div>
     <h2 class="sec-title reveal">Featured work</h2>
     <p class="sec-sub reveal d1">A selection of my data analysis and BI projects.</p>
-    <div class="project-grid">
-
-      <div class="project-card reveal">
-        <div class="project-icon">🛒</div>
-        <h3>E-Commerce Store Analysis</h3>
-        <p>Identified sales trends, customer behavior &amp; top-performing products; recommendations for inventory.</p>
-        <div class="project-tools">Power Query · Power BI · Excel</div>
-        <a class="project-link" href="https://github.com/Saadhannout/E-Commerce-Store" target="_blank" rel="noopener">View on GitHub <span>→</span></a>
-      </div>
-
-      <div class="project-card reveal d1">
-        <div class="project-icon">🚗</div>
-        <h3>Used Car Price Regression</h3>
-        <p>Cleaned data, applied Linear &amp; Decision Tree regression, evaluated with R²/RMSE.</p>
-        <div class="project-tools">Python · Seaborn · Power BI</div>
-        <a class="project-link" href="https://github.com/Saadhannout/Regression-of-Used-Car-Prices" target="_blank" rel="noopener">View on GitHub <span>→</span></a>
-      </div>
-
-      <div class="project-card reveal d2">
-        <div class="project-icon">🗄️</div>
-        <h3>SQL on Northwind2021</h3>
-        <p>Advanced SQL — JOINs, GROUP BY, subqueries — for sales, orders &amp; employee analysis.</p>
-        <div class="project-tools">SQL Server</div>
-        <a class="project-link" href="https://github.com/Saadhannout/SQL-Queries-Northwind2021" target="_blank" rel="noopener">View on GitHub <span>→</span></a>
-      </div>
-
-      <div class="project-card reveal">
-        <div class="project-icon">⚽</div>
-        <h3>WorldCup Data Analysis</h3>
-        <p>FIFA World Cup history (1930–2022): rankings vs. performance, record-breaking stats.</p>
-        <div class="project-tools">Excel · Power BI · DAX</div>
-        <a class="project-link" href="https://github.com/Saadhannout/WorldCup-Data-Analysis" target="_blank" rel="noopener">View on GitHub <span>→</span></a>
-      </div>
-
-      <div class="project-card reveal d1">
-        <div class="project-icon">📈</div>
-        <h3>Sales Performance Analysis</h3>
-        <p>Orders, revenue &amp; returns by category, country, and time period.</p>
-        <div class="project-tools">Power BI</div>
-        <a class="project-link" href="https://github.com/Saadhannout/Sales-Performance-Analysis-PowerBI" target="_blank" rel="noopener">View on GitHub <span>→</span></a>
-      </div>
-
-      <div class="project-card reveal d2">
-        <div class="project-icon">☕</div>
-        <h3>Coffee Shop Sales Analysis</h3>
-        <p>Retail sales trends, product performance &amp; location comparisons.</p>
-        <div class="project-tools">Power BI · Excel</div>
-        <a class="project-link" href="https://github.com/Saadhannout/Coffee-Shop-Sales-" target="_blank" rel="noopener">View on GitHub <span>→</span></a>
-      </div>
-
-    </div>
+    <div class="project-grid" id="projectGrid"></div>
   </section>
 
   <section id="skills">
@@ -641,6 +641,170 @@
   <footer>© 2026 Saad Hannout — Built with data, dashboards &amp; a lot of coffee ☕</footer>
 </div>
 </main>
+
+
+<div class="pm-overlay" id="pmOverlay" aria-hidden="true">
+  <div class="pm-box" role="dialog" aria-modal="true" aria-labelledby="pmTitle">
+    <button class="pm-close" id="pmClose" aria-label="Close">✕</button>
+    <h3 class="pm-title" id="pmTitle"></h3>
+    <div class="pm-tools" id="pmTools"></div>
+    <div class="pm-main" id="pmMain">
+      <button class="pm-nav pm-prev" id="pmPrev" aria-label="Previous">‹</button>
+      <button class="pm-nav pm-next" id="pmNext" aria-label="Next">›</button>
+    </div>
+    <div class="pm-thumbs" id="pmThumbs"></div>
+    <div class="pm-body" id="pmBody"></div>
+  </div>
+</div>
+
+<script>
+/* =====================================================================
+   PROJECTS  —  ده المكان الوحيد اللي بتعدل فيه المشاريع.
+   - لإضافة مشروع: انسخ بلوك { ... } كامل والصقه وغيّر البيانات.
+   - الصور: حطها في فولدر images/<folder>/ واكتب أسماءها في images.
+   - أول صورة في القائمة هي صورة الكارت (cover).
+   ===================================================================== */
+const PROJECTS = [
+  {
+    icon: "🛒", folder: "ecommerce",
+    title: "E-Commerce Store Analysis",
+    short: "Sales trends, customer behavior & top-performing products, with inventory recommendations.",
+    tools: "Power Query · Power BI · Excel",
+    images: ["cover.png", "dashboard-1.png", "dashboard-2.png"],
+    about: [
+      "Analyzed an online store's data to understand how sales move over time, who the customers are, and which products carry the business.",
+      "Cleaned and modeled the data in Power Query, then built an interactive Power BI dashboard for exploring the results."
+    ],
+    highlights: ["Sales trends over time", "Customer behavior analysis", "Top-performing products", "Inventory recommendations"],
+    source: "https://github.com/Saadhannout/E-Commerce-Store"
+  },
+  {
+    icon: "🚗", folder: "used-cars",
+    title: "Used Car Price Regression",
+    short: "Cleaned data and predicted used-car prices with Linear & Decision Tree regression.",
+    tools: "Python · Seaborn · Power BI",
+    images: ["cover.png", "chart-1.png", "chart-2.png"],
+    about: [
+      "Built a model to predict used-car prices from their features. Started with data cleaning and exploratory analysis, then trained and compared two regression models.",
+      "Models were evaluated with R² and RMSE, and results were visualized in Seaborn and Power BI."
+    ],
+    highlights: ["Data cleaning & EDA", "Linear Regression vs. Decision Tree", "Evaluation with R² / RMSE"],
+    source: "https://github.com/Saadhannout/Regression-of-Used-Car-Prices"
+  },
+  {
+    icon: "🗄️", folder: "northwind",
+    title: "SQL on Northwind2021",
+    short: "Advanced SQL for sales, orders & employee analysis.",
+    tools: "SQL Server",
+    images: ["cover.png", "query-1.png", "query-2.png"],
+    about: [
+      "A set of analytical queries on the Northwind2021 database covering sales, orders and employee performance."
+    ],
+    highlights: ["JOINs across multiple tables", "GROUP BY & aggregations", "Subqueries"],
+    source: "https://github.com/Saadhannout/SQL-Queries-Northwind2021"
+  },
+  {
+    icon: "⚽", folder: "worldcup",
+    title: "WorldCup Data Analysis",
+    short: "FIFA World Cup history (1930–2022): rankings vs. performance and record-breaking stats.",
+    tools: "Excel · Power BI · DAX",
+    images: ["cover.png", "dashboard-1.png", "dashboard-2.png"],
+    about: [
+      "Explored every FIFA World Cup from 1930 to 2022 to see how team rankings relate to actual tournament performance, and to surface record-breaking stats."
+    ],
+    highlights: ["Rankings vs. performance", "Record-breaking stats", "DAX measures"],
+    source: "https://github.com/Saadhannout/WorldCup-Data-Analysis"
+  },
+  {
+    icon: "📈", folder: "sales-performance",
+    title: "Sales Performance Analysis",
+    short: "Orders, revenue & returns by category, country and time period.",
+    tools: "Power BI",
+    images: ["cover.png", "dashboard-1.png", "dashboard-2.png"],
+    about: [
+      "A Power BI report that tracks orders, revenue and returns, and lets you slice them by product category, country and time period."
+    ],
+    highlights: ["Orders & revenue KPIs", "Returns analysis", "Category / country / time filters"],
+    source: "https://github.com/Saadhannout/Sales-Performance-Analysis-PowerBI"
+  },
+  {
+    icon: "☕", folder: "coffee-shop",
+    title: "Coffee Shop Sales Analysis",
+    short: "Retail sales trends, product performance & location comparisons.",
+    tools: "Power BI · Excel",
+    images: ["cover.png", "dashboard-1.png", "dashboard-2.png"],
+    about: [
+      "Analyzed a coffee shop chain's sales to find trends over time, compare product performance and compare locations."
+    ],
+    highlights: ["Sales trends", "Product performance", "Location comparison"],
+    source: "https://github.com/Saadhannout/Coffee-Shop-Sales-"
+  }
+];
+
+/* ---------- render cards ---------- */
+const imgPath = (p, f) => `images/${p.folder}/${f}`;
+const grid = document.getElementById('projectGrid');
+grid.innerHTML = PROJECTS.map((p, i) => `
+  <div class="project-card reveal ${['','d1','d2'][i%3]}" data-i="${i}" tabindex="0" role="button" aria-label="Open ${p.title}">
+    <div class="project-cover">
+      <img src="${imgPath(p, p.images[0])}" alt="${p.title}" loading="lazy"
+           onerror="this.remove()"><span class="ph" style="position:absolute"></span>
+    </div>
+    <h3>${p.title}</h3>
+    <p>${p.short}</p>
+    <div class="project-tools">${p.tools}</div>
+    <span class="project-link">View project <span>→</span></span>
+  </div>`).join('');
+/* لو الصورة مش موجودة يظهر الإيموجي بدلها */
+grid.querySelectorAll('.project-cover').forEach((c, i) => {
+  c.style.position = 'relative';
+  c.querySelector('.ph').textContent = PROJECTS[i].icon;
+  c.querySelector('.ph').style.zIndex = 0;
+  const img = c.querySelector('img'); if (img) { img.style.position='relative'; img.style.zIndex = 1; }
+});
+
+/* ---------- modal ---------- */
+const ov = document.getElementById('pmOverlay'), pmMain = document.getElementById('pmMain'),
+      pmThumbs = document.getElementById('pmThumbs');
+let cur = null, idx = 0;
+function showImage(n){
+  const p = PROJECTS[cur]; idx = (n + p.images.length) % p.images.length;
+  pmMain.querySelectorAll('img, .pm-ph').forEach(e => e.remove());
+  const img = new Image(); img.alt = p.title + ' screenshot ' + (idx+1);
+  img.onerror = () => { img.remove(); const d = document.createElement('div'); d.className='pm-ph'; d.textContent = p.icon; pmMain.prepend(d); };
+  img.src = imgPath(p, p.images[idx]); pmMain.prepend(img);
+  pmThumbs.querySelectorAll('img').forEach((t, k) => t.classList.toggle('active', k === idx));
+  const multi = p.images.length > 1;
+  document.getElementById('pmPrev').style.display = document.getElementById('pmNext').style.display = multi ? '' : 'none';
+}
+function openProject(i){
+  cur = i; const p = PROJECTS[i];
+  document.getElementById('pmTitle').textContent = p.title;
+  document.getElementById('pmTools').textContent = p.tools;
+  pmThumbs.innerHTML = p.images.length > 1 ? p.images.map((f, k) =>
+    `<img src="${imgPath(p, f)}" alt="" data-k="${k}" onerror="this.remove()">`).join('') : '';
+  document.getElementById('pmBody').innerHTML =
+    `<h4>About the project</h4>${p.about.map(t => `<p>${t}</p>`).join('')}` +
+    (p.highlights?.length ? `<h4>What's inside</h4><ul>${p.highlights.map(h => `<li>${h}</li>`).join('')}</ul>` : '') +
+    (p.source ? `<a class="pm-source" href="${p.source}" target="_blank" rel="noopener">Source code</a>` : '');
+  showImage(0);
+  ov.classList.add('open'); ov.setAttribute('aria-hidden','false'); document.body.style.overflow = 'hidden';
+}
+function closeProject(){ ov.classList.remove('open'); ov.setAttribute('aria-hidden','true'); document.body.style.overflow = ''; }
+grid.addEventListener('click', e => { const c = e.target.closest('.project-card'); if (c) openProject(+c.dataset.i); });
+grid.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' '){ const c = e.target.closest('.project-card'); if (c){ e.preventDefault(); openProject(+c.dataset.i); } } });
+pmThumbs.addEventListener('click', e => { if (e.target.dataset.k !== undefined) showImage(+e.target.dataset.k); });
+document.getElementById('pmPrev').onclick = () => showImage(idx - 1);
+document.getElementById('pmNext').onclick = () => showImage(idx + 1);
+document.getElementById('pmClose').onclick = closeProject;
+ov.addEventListener('click', e => { if (e.target === ov) closeProject(); });
+document.addEventListener('keydown', e => {
+  if (!ov.classList.contains('open')) return;
+  if (e.key === 'Escape') closeProject();
+  if (e.key === 'ArrowRight') showImage(idx + 1);
+  if (e.key === 'ArrowLeft') showImage(idx - 1);
+});
+</script>
 
 <script>
   // Scroll reveal
