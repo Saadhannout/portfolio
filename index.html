@@ -696,17 +696,26 @@
    - أول صورة في القائمة هي صورة الكارت (cover).
    ===================================================================== */
 const PROJECTS = [
-  {
+   {
     icon: "🛒", folder: "ecommerce",
     title: "E-Commerce Store Analysis",
-    short: "Sales trends, customer behavior & top-performing products, with inventory recommendations.",
+    short: "Power BI dashboard analyzing 12.64M in sales and 1.47M in profit (2012–2015) across five markets, product categories, and shipping modes.",
     tools: "Power Query · Power BI · Excel",
     images: ["cover.png", "dashboard-1.png", "dashboard-2.png","dashboard-3.png"],
     about: [
-      "Analyzed an online store's data to understand how sales move over time, who the customers are, and which products carry the business.",
-      "Cleaned and modeled the data in Power Query, then built an interactive Power BI dashboard for exploring the results."
+      "An interactive 3-page Power BI dashboard analyzing e-commerce performance from 2012 to 2015: Overall Performance, Market, and Shipping. It covers sales, profit, quantity, shipping cost, product categories, markets, customer segments, and shipping modes. The dashboard shows total sales of 12.64M, total profit of 1.47M (an 11.61% margin), 178K units sold, and 1.36M in shipping cost across 5 markets (Asia Pacific, Europe, USCA, LATAM, Africa).",
+      "Findings describe patterns in the data, not verified causes."
     ],
-    highlights: ["Sales trends over time", "Customer behavior analysis", "Top-performing products", "Inventory recommendations"],
+    highlights: [
+      "Overall Performance: KPIs, sales by market (map), and sales by category, with filters by ship mode and year",
+      "Market: profit trend by year, with filters by category and market",
+      "Shipping: shipping costs over time and by customer segment, and sales and profit by shipping mode, with filters by order priority and segment",
+      "Technology led sales (4.7M), followed by Furniture (4.1M) and Office Supplies (3.8M)",
+      "Profit grew every year, from 249K in 2012 to 504K in 2015, more than doubling over the period",
+      "Consumer was the segment with the highest shipping cost (700K), followed by Corporate (412K) and Home Office (246K)",
+      "Standard Class was the dominant shipping mode: 7.6M in sales (about 60% of total) and 0.9M in profit, ahead of Second Class (2.6M), First Class (1.8M), and Same Day (0.7M)",
+      "Shipping cost equals about 10.8% of sales (1.36M of 12.64M)"
+    ],
     source: "https://github.com/Saadhannout/E-Commerce-Store"
   },
 
@@ -733,19 +742,36 @@ const PROJECTS = [
 
 
 
-  {
-    icon: "🚗", folder: "used-cars",
-    title: "Used Car Price Regression",
-    short: "Cleaned data and predicted used-car prices with Linear & Decision Tree regression.",
-    tools: "Python · Seaborn · Power BI",
-    images: ["cover.png", "chart-1.png", "chart-2.png"],
-    about: [
-      "Built a model to predict used-car prices from their features. Started with data cleaning and exploratory analysis, then trained and compared two regression models.",
-      "Models were evaluated with R² and RMSE, and results were visualized in Seaborn and Power BI."
-    ],
-    highlights: ["Data cleaning & EDA", "Linear Regression vs. Decision Tree", "Evaluation with R² / RMSE"],
-    source: "https://github.com/Saadhannout/Regression-of-Used-Car-Prices"
-  },
+  
+{
+  icon: "🚗",
+  folder: "Regression-of-Used-Car-Prices",
+  title: "Used Car Price Prediction & Analysis",
+  short: "Analyzed 188K+ used-car listings, engineered features, evaluated regression models, and built a Power BI dashboard for pricing insights.",
+  tools: "Python · Pandas · Seaborn · Scikit-learn · XGBoost · Power BI · Gradio",
+  images: ["cover.png", "chart-1.png", "chart-2.png"],
+  about: [
+    "A team project completed by 4 members to analyze used-car listings, explore the factors associated with listing prices, and build baseline machine learning models for price prediction. The workflow covered data cleaning, exploratory data analysis, feature engineering, regression modeling, model evaluation, and an interactive Power BI dashboard.",
+    "The dataset contained 188,533 training listings with 13 columns. Missing values were handled, engine specifications were extracted using regular expressions, model year was transformed into model age, and categorical features were encoded using price-based rankings. Linear Regression and XGBRegressor were evaluated using R², RMSE, MAE, and MSE. A simple Gradio demo was also developed to filter listings by budget; it does not use the trained prediction models.",
+    "The models achieved R² scores of 0.1195 for Linear Regression and 0.0761 for XGBRegressor. These baseline results indicate limited predictive performance, so the models are not reliable enough for real-world pricing decisions without further improvement."
+  ],
+  highlights: [
+    "Analyzed 188,533 training listings across 13 columns, covering brand, model year, mileage, fuel type, engine specifications, transmission, accident history, and listing price",
+    "Handled missing values in fuel type, accident history, and clean title fields; no duplicate rows were found",
+    "Engineered features including horsepower, cylinder count, model age, binary accident indicators, and price-ranked categorical variables",
+    "Compared Linear Regression and XGBRegressor using an 80/20 train-validation split with random_state=42",
+    "Linear Regression achieved R² = 0.1195, RMSE = 69,974, and MAE = 23,258",
+    "XGBRegressor achieved R² = 0.0761, RMSE = 71,678, and MAE = 20,396; it had the lower MAE, while Linear Regression achieved the higher R² and lower RMSE",
+    "Correlation analysis showed negative relationships between price and mileage (-0.283) and between price and model age (-0.232), while horsepower (0.214) and brand tier (0.162) had positive correlations with price",
+    "Luxury brands including Bugatti, Lamborghini, and Rolls-Royce had the highest average listing prices in the analyzed data",
+    "The Power BI dashboard reported an average listing price of 43.88K, a clean-title share of 88.64%, and an accident or damage share of 22.05%",
+    "Explored price distributions, brand-level pricing, fuel-type comparisons, clean-title share, accident share, and average horsepower through interactive Power BI visuals",
+    "Built a Gradio interface that returns the five cheapest listings within a user-defined budget by filtering the dataset, rather than generating model-based predictions",
+    "Identified limitations including low model performance, price outliers, and potential target leakage from price-based categorical encoding; proposed cross-validation, hyperparameter tuning, feature selection, and log transformation as next steps"
+  ],
+  source: "https://github.com/Saadhannout/Regression-of-Used-Car-Prices"
+},
+
   {
     icon: "🗄️", folder: "northwind",
     title: "SQL on Northwind2021",
@@ -758,40 +784,70 @@ const PROJECTS = [
     highlights: ["JOINs across multiple tables", "GROUP BY & aggregations", "Subqueries"],
     source: "https://github.com/Saadhannout/SQL-Queries-Northwind2021"
   },
-  {
+    {
     icon: "⚽", folder: "worldcup",
     title: "WorldCup Data Analysis",
-    short: "FIFA World Cup history (1930–2022): rankings vs. performance and record-breaking stats.",
-    tools: "Excel · Power BI · DAX",
+    short: "FIFA World Cup history (1930–2022): 964 matches, FIFA rankings for 211 teams, and match-level analysis in a three-page dashboard.",
+    tools: "Excel · Power Query · Power BI · DAX",
     images: ["cover.png", "dashboard-1.png", "dashboard-2.png" ,"dashboard-3.png"],
     about: [
-      "Explored every FIFA World Cup from 1930 to 2022 to see how team rankings relate to actual tournament performance, and to surface record-breaking stats."
+      "An interactive Power BI dashboard covering FIFA World Cup history from 1930 to 2022, with three pages: World Cup Overview, FIFA Rankings, and Match Analysis. Data was cleaned and prepared with Excel and Power Query. The dashboard covers 964 matches, 211 teams in the rankings page, about 44M in total attendance, and 22 champion titles counted.",
+      "Findings describe patterns in the data, not verified causes."
     ],
-    highlights: ["Rankings vs. performance", "Record-breaking stats", "DAX measures"],
+    highlights: [
+      "World Cup Overview: teams per tournament, champions, runner-ups, top scorers by tournament, with filters by host, year, champion, and runner-up",
+      "FIFA Rankings: top 10 teams by FIFA points (2022) and rank distribution by confederation",
+      "Match Analysis: goals by year, expected goals (xG) by round, goals by venue on a map, and a match-level table with date, teams, score, and referee",
+      "Brazil won the most titles (5), followed by Italy (4) and Argentina (3)",
+      "Germany was the most frequent runner-up (4), followed by Argentina and the Netherlands (3 each)",
+      "The tournament grew from 13 teams in 1930 to 24 in the early 1980s, then to 32 teams from 1998 onward",
+      "Brazil led the FIFA points table (1,841), followed by Belgium (1,817) and Argentina (1,774)",
+      "Kylian Mbappé scored 8 goals in the 2022 tournament"
+    ],
     source: "https://github.com/Saadhannout/WorldCup-Data-Analysis"
   },
-  {
+    {
     icon: "📈", folder: "sales-performance",
     title: "Sales Performance Analysis",
-    short: "Orders, revenue & returns by category, country and time period.",
+    short: "Analyzed 56,046 order lines for AdventureWorks Cycles: orders, revenue and returns by category, product, month and geography.",
     tools: "Power BI",
     images: ["cover.png", "dashboard-1.png", "dashboard-2.png"],
     about: [
-      "A Power BI report that tracks orders, revenue and returns, and lets you slice them by product category, country and time period."
+      "Analyzed sales performance for AdventureWorks Cycles using Power BI, covering orders, revenue, and returns by product category, subcategory, product, month, and geography. The dashboard covers 56,046 order lines, 84,174 units sold, 24,914,587 in total revenue, and 1,809 returns (a 2.2% overall return rate).",
+      "Findings describe patterns in the data, not verified causes. Further analysis (profitability, customer segmentation) is needed before business decisions."
     ],
-    highlights: ["Orders & revenue KPIs", "Returns analysis", "Category / country / time filters"],
+    highlights: [
+      "Orders by category and subcategory, plus a product-level table with orders, quantity sold, revenue, and return rate",
+      "Monthly revenue, orders, and returns, and revenue and orders by country colored by continent",
+      "Filters by year/month and continent, with top-product and bottom-product cards",
+      "Accessories made up 33,607 of 56,046 order lines (about 60%), followed by Bikes (13,929) and Clothing (8,510)",
+      "Tires and Tubes was the top subcategory by orders (15,970), followed by Bottles and Cages (7,547) and Road Bikes (7,099)",
+      "Water Bottle – 30 oz. was the top product by orders",
+      "Bikes had far fewer orders, but each Mountain-100 Black model (sizes 38 and 42) generated 87,750 from 26 orders"
+    ],
     source: "https://github.com/Saadhannout/Sales-Performance-Analysis-PowerBI"
   },
-  {
+    {
     icon: "☕", folder: "coffee-shop",
     title: "Coffee Shop Sales Analysis",
-    short: "Retail sales trends, product performance & location comparisons.",
-    tools: "Power BI · Excel",
+    short: "Excel dashboard analyzing $698,812 in sales and 149,116 footfall across three store locations.",
+    tools: "Excel · Power Query · Power Pivot",
     images: ["cover.png", "dashboard-1.png", "dashboard-2.png"],
     about: [
-      "Analyzed a coffee shop chain's sales to find trends over time, compare product performance and compare locations."
+      "An interactive Excel dashboard analyzing coffee shop sales across three store locations (Astoria, Hell's Kitchen, Lower Manhattan), covering sales, footfall, product categories, order sizes, and traffic by hour and weekday, with filters by month and day. The dashboard shows total sales of $698,812, total footfall of 149,116, an average bill of $4.69 per person, and 1.44 average orders per person, for January through June.",
+      "Findings describe patterns in the data, not verified causes."
     ],
-    highlights: ["Sales trends", "Product performance", "Location comparison"],
+    highlights: [
+      "Order activity by hour, sales by product category, order distribution by size, and top 5 products by sales",
+      "Footfall and total sales by store location, and footfall by day of the week",
+      "Coffee accounted for 39% of sales, followed by Bakery at 12%",
+      "Barista Espresso was the top product by sales ($91,406), followed by Brewed Chai tea ($77,082) and Hot chocolate ($72,416)",
+      "Hell's Kitchen had the highest sales ($236,511) and footfall (50,735), while Lower Manhattan had the lowest on both ($230,057 and 47,782)",
+      "Despite the lowest footfall, Lower Manhattan had the highest average bill per person (about $4.81 vs $4.66 in Hell's Kitchen and $4.59 in Astoria)",
+      "Order activity peaked in the morning (8–10 AM) and dropped after 11 AM",
+      "Friday was the busiest day (21,701) and Saturday the slowest (20,510)",
+      "About 30% of orders had no defined size, which limits size-level analysis"
+    ],
     source: "https://github.com/Saadhannout/Coffee-Shop-Sales-"
   }
 ];
